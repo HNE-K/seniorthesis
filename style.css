@@ -1,0 +1,187 @@
+#obj1 {
+    position: absolute;
+    z-index: 1;
+    top: 100px;
+    left: 150px;
+    width: 80px;
+    height: 40px;
+    background-color: #ff00ff;
+    border: 2px;
+    border-style: double;
+    color: #aaffee;
+    text-align: center;
+    padding: 10px;
+}
+#obj2 {
+    position: absolute;
+    z-index: 1;
+    top: 100px;
+    left: 350px;
+    width: 80px;
+    height: 40px;
+    background-color: #ff00ff;
+    border: 2px;
+    border-style: double;
+    color: #aaffee;
+    text-align: center;
+    padding: 10px;
+}
+#obj3 {
+    position: absolute;
+    z-index: 1;
+    top: 250px;
+    left: 210px;
+    width: 80px;
+    height: 40px;
+    background-color: #ff00ff;
+    border: 2px;
+    border-style: double;
+    color: #aaffee;
+    text-align: center;
+    padding: 10px;
+}
+.hp {
+    position: absolute;
+    z-index: 50;
+    top: 15px;
+    left: 15px;
+}
+body {
+    cursor: default;
+    color: #e0e0ff;
+    background-color: #0000ff;
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+}
+a:link {
+    color: #ffffff;
+}
+a:visited {
+    color: #ffffff;
+}
+a:hover {
+    color: #ffa3d8;
+}
+a:active {
+    color: #a0d0ff;
+}
+#otop {
+    position: absolute;
+    top: 2px;
+    left: 0px;
+    width: 99%;
+    height: 20px;
+    text-align: right;
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* margin: -100px 0 0 -150px; */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;
+    width: 70%;
+    height: 15px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    position: fixed;
+    bottom: 150px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+/* animated BG */
+*{
+    margin: 0;
+    padding: 0;
+  }
+  section{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #3586ff;
+    overflow: hidden;
+  }
+  section .air{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url(https://1.bp.blogspot.com/-xQUc-TovqDk/XdxogmMqIRI/AAAAAAAACvI/AizpnE509UMGBcTiLJ58BC6iViPYGYQfQCLcBGAsYHQ/s1600/wave.png);
+    background-size: 1000px 100px
+  }
+  section .air.air1{
+    animation: wave 30s linear infinite;
+    z-index: 1000;
+    opacity: 1;
+    animation-delay: 0s;
+    bottom: 0;
+  }
+  section .air.air2{
+    animation: wave2 15s linear infinite;
+    z-index: 999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    bottom: 10px;
+  }
+  section .air.air3{
+    animation: wave 30s linear infinite;
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    bottom: 15px;
+  }
+  section .air.air4{
+    animation: wave2 5s linear infinite;
+    z-index: 997;
+    opacity: 0.7;
+    animation-delay: -5s;
+    bottom: 20px;
+  }
+  @keyframes wave{
+    0%{
+      background-position-x: 0px; 
+    }
+    100%{
+      background-position-x: 1000px; 
+    }
+  }
+  @keyframes wave2{
+    0%{
+      background-position-x: 0px; 
+    }
+    100%{
+      background-position-x: -1000px; 
+    }
+  }
