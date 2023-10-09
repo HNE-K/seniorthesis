@@ -82,9 +82,22 @@ a:active {
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    top: 50%;
-    left: 50%;
     /* margin: -100px 0 0 -150px; */
+}
+
+#art1 {
+  top: 50%;
+  left: 50%;
+}
+
+#art2 {
+  top: 30%;
+  left: 30%;
+}
+
+#art3 {
+  top: 50%;
+  left: 170%;
 }
 
 /* The slider itself */
@@ -136,7 +149,8 @@ a:active {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 300%;
+    /* overflow-x: auto; */
     height: 100px;
     background: url(https://1.bp.blogspot.com/-xQUc-TovqDk/XdxogmMqIRI/AAAAAAAACvI/AizpnE509UMGBcTiLJ58BC6iViPYGYQfQCLcBGAsYHQ/s1600/wave.png);
     background-size: 1000px 100px

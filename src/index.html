@@ -3,7 +3,7 @@
     <script src="index.js"></script>
 </head>
 
-<section>
+<section style="overflow-x: scroll;">
     <div class='air air1'></div>
     <div class='air air2'></div>
     <div class='air air3'></div>
@@ -14,10 +14,35 @@
 	<div id="obj1">
 		Unicorn
 	</div>
-    <span class="dot" id="art1"></span>
+    <div id="art1Div">
+        <span class="dot" id="art1"></span>
+        <div class="hide" id="art1Preview" style="visibility: hidden">
+            <div>
+                Preview of Art1
+            </div>
+            <a href="art1.html" class="button">View Art</a>
+        </div>
+    </div>
+    <div id="art2Div">
+        <span class="dot" id="art2"></span>
+        <div class="hide" id="art2Preview" style="visibility: hidden">
+            <div>
+                Preview of Art2
+            </div>
+            <a href="art2.html" class="button">View Art</a>
+        </div>
+    </div>
+    <div id="art3Div">
+        <span class="dot" id="art3"></span>
+        <div class="hide" id="art3Preview" style="visibility: hidden">
+            <div>
+                Preview of Art3
+            </div>
+            <a href="art3.html" class="button">View Art</a>
+        </div>
+    </div>
     <div class="slidecontainer">
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
     </div>
 </section>
-  
   
