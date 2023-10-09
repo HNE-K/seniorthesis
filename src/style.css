@@ -82,22 +82,48 @@ a:active {
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    /* margin: -100px 0 0 -150px; */
+}
+
+.hide {
+  display: inline-block;
+  position: absolute;
+  width: 50px; /* standardize width */
 }
 
 #art1 {
+  position: absolute;
   top: 50%;
   left: 50%;
 }
 
+#art1Preview {
+  position: absolute;
+  top: 43%;
+  left: 57%;
+}
+
 #art2 {
+  position: absolute;
   top: 30%;
   left: 30%;
 }
 
+#art2Preview {
+  position: absolute;
+  top: 23%;
+  left: 37%;
+}
+
 #art3 {
+  position: absolute;
   top: 50%;
   left: 170%;
+}
+
+#art3Preview {
+  position: absolute;
+  top: 43%;
+  left: 177%;
 }
 
 /* The slider itself */
@@ -112,7 +138,8 @@ a:active {
     -webkit-transition: .2s;
     transition: opacity .2s;
     position: fixed;
-    bottom: 150px;
+    bottom: 20%;
+    left: 15%;
 }
 
 .slider::-webkit-slider-thumb {
