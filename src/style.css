@@ -7,14 +7,6 @@
     height: 40px;
 }
 
-body {
-    cursor: default;
-    color: #e0e0ff;
-    background-color: #0000ff;
-    font-size: 16px;
-    margin: 0px;
-    padding: 0px;
-}
 a:link {
     color: #ffffff;
 }

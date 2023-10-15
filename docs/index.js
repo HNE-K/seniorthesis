@@ -85,6 +85,25 @@ function init() {
     document.onkeypress = moving;
     document.onkeydown = moving;
     slider = document.getElementById("myRange");
+    // upon clicking/moving the slider, this function runs.
+    slider.oninput = function() {
+        if (slider.value >= 1 && slider.value <= 25) {
+            console.log("spring");
+            document.getElementById("world").style.background = "#abff35";
+        }
+        if (slider.value >= 26 && slider.value <= 50) {
+            console.log("summer");
+            document.getElementById("world").style.background = "#3586ff";
+        }
+        if (slider.value >= 51 && slider.value <= 75) {
+            console.log("autumn");
+            document.getElementById("world").style.background = "#ebbd34";
+        }
+        if (slider.value >= 76 && slider.value <= 100) {
+            console.log("winter");
+            document.getElementById("world").style.background = "#9c2dcf";
+        }
+    }
 
     const frames = document.getElementById("obj1").children;
     const frameCount = frames.length;
