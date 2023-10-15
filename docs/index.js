@@ -7,6 +7,7 @@ var slider = null;
 var oLeft = 0;
 var oTop = 0;
 var speed = 5;
+var facingRight = null;
 
 function startMove() {
     if (dragobj) {
@@ -33,12 +34,20 @@ function updatePos(Ev) {
     switch (iKeyCode) {
         case 65: // 37 is Left, 65 is A
             oLeft -= speed;
+            if (facingRight) {
+                document.getElementById("obj1").style.transform = "scaleX(-1)"; // flip
+                facingRight = false;
+            }
             break;
         case 87: // 38 is Up, 87 is W
             oTop -= speed;
             break;
         case 68: // 39 is Right, 58 is D
             oLeft += speed;
+            if (!facingRight) {
+                document.getElementById("obj1").style.transform = "scaleX(1)"; // flip again
+                facingRight = true;
+            }
             break;
         case 83: // 40 is Down, 83 is S
             oTop += speed;
@@ -47,22 +56,19 @@ function updatePos(Ev) {
             break;
     }
 
-    if (Math.abs(oLeft - art1.offsetLeft) <= 50 && Math.abs(oTop - art1.offsetTop) <= 50) {
-        console.log("reached range");
+    if (oLeft - art1.offsetLeft >= -60 && oLeft - art1.offsetLeft <= 0 && oTop - art1.offsetTop >= -60 && oTop - art1.offsetTop <= 0) {
         document.getElementById("art1Preview").style.visibility = "visible";
     } else {
         document.getElementById("art1Preview").style.visibility = "hidden";
     }
     
-    if (Math.abs(oLeft - art2.offsetLeft) <= 50 && Math.abs(oTop - art2.offsetTop) <= 50) {
-        console.log("reached range");
+    if (oLeft - art2.offsetLeft >= -60 && oLeft - art2.offsetLeft <= 0 && oTop - art2.offsetTop >= -60 && oTop - art2.offsetTop <= 0) {
         document.getElementById("art2Preview").style.visibility = "visible";
     } else {
         document.getElementById("art2Preview").style.visibility = "hidden";
     }
 
-    if (Math.abs(oLeft - art3.offsetLeft) <= 50 && Math.abs(oTop - art3.offsetTop) <= 50) {
-        console.log("reached range");
+    if (oLeft - art3.offsetLeft >= -60 && oLeft - art3.offsetLeft <= 0 && oTop - art3.offsetTop >= -60 && oTop - art3.offsetTop <= 0) {
         document.getElementById("art3Preview").style.visibility = "visible";
     } else {
         document.getElementById("art3Preview").style.visibility = "hidden";
@@ -71,6 +77,7 @@ function updatePos(Ev) {
 
 function init() {
     dragobj = document.getElementById("obj1");
+    facingRight = true;
     art1 = document.getElementById("art1");
     art2 = document.getElementById("art2");
     art3 = document.getElementById("art3");
@@ -78,5 +85,13 @@ function init() {
     document.onkeypress = moving;
     document.onkeydown = moving;
     slider = document.getElementById("myRange");
+
+    const frames = document.getElementById("obj1").children;
+    const frameCount = frames.length;
+    let i = 0;
+    setInterval(function () { 
+    frames[i % frameCount].style.display = "none";
+    frames[++i % frameCount].style.display = "block";
+    }, 100);
 }
 window.onload = init;

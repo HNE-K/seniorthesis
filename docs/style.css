@@ -5,47 +5,8 @@
     left: 150px;
     width: 80px;
     height: 40px;
-    background-color: #ff00ff;
-    border: 2px;
-    border-style: double;
-    color: #aaffee;
-    text-align: center;
-    padding: 10px;
 }
-#obj2 {
-    position: absolute;
-    z-index: 1;
-    top: 100px;
-    left: 350px;
-    width: 80px;
-    height: 40px;
-    background-color: #ff00ff;
-    border: 2px;
-    border-style: double;
-    color: #aaffee;
-    text-align: center;
-    padding: 10px;
-}
-#obj3 {
-    position: absolute;
-    z-index: 1;
-    top: 250px;
-    left: 210px;
-    width: 80px;
-    height: 40px;
-    background-color: #ff00ff;
-    border: 2px;
-    border-style: double;
-    color: #aaffee;
-    text-align: center;
-    padding: 10px;
-}
-.hp {
-    position: absolute;
-    z-index: 50;
-    top: 15px;
-    left: 15px;
-}
+
 body {
     cursor: default;
     color: #e0e0ff;
@@ -226,3 +187,14 @@ a:active {
       background-position-x: -1000px; 
     }
   }
+
+  /* animated unicorn */
+#obj1 img {
+  display: none;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+#obj1 img:first-child {
+    display: block;
+}
