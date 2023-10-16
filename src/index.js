@@ -8,6 +8,7 @@ var oLeft = 0;
 var oTop = 0;
 var speed = 5;
 var facingRight = null;
+var moving = null;
 
 function startMove() {
     if (dragobj) {
@@ -48,12 +49,12 @@ function updatePos(Ev) {
             oTop -= speed;
             break;
         case 68: // 39 is Right, 58 is D
+            moving = true;
             oLeft += speed;
             if (!facingRight) {
                 document.getElementById("obj1").style.transform = "scaleX(1)"; // flip again
                 facingRight = true;
             }
-            // console.log(oLeft);
             if (oLeft - document.getElementById("world").scrollLeft > 800) {
                 // treat section as our html body
                 document.getElementById("world").scrollBy(5, 0);
@@ -117,10 +118,18 @@ function init() {
 
     const frames = document.getElementById("obj1").children;
     const frameCount = frames.length;
-    let i = 0;
+    let i = 0; // frame number
+    moving = false;
+    // loop through the frame's numbers. setInterval means do this stuff on loop every 100 ms = 0.1 s
     setInterval(function () { 
-    frames[i % frameCount].style.display = "none";
-    frames[++i % frameCount].style.display = "block";
+        if (moving) { // there are 15 frames for running rn
+            frames[i % 15].style.display = "none";
+            frames[++i % 15].style.display = "block";
+        }
+        else { // i % 2 + 15 jumps to the 16th and 17th items
+            frames[i % 2 + 15].style.display = "none";
+            frames[++i % 2 + 15].style.display = "block";
+        }
     }, 100);
 }
 window.onload = init;
