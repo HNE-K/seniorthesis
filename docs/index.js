@@ -38,6 +38,11 @@ function updatePos(Ev) {
                 document.getElementById("obj1").style.transform = "scaleX(-1)"; // flip
                 facingRight = false;
             }
+            // 200 or less space between unicorn's left and the world (size 1000) 's left
+            if (oLeft - document.getElementById("world").scrollLeft < 200) {
+                // treat section as our html body
+                document.getElementById("world").scrollBy(-5, 0);
+            }
             break;
         case 87: // 38 is Up, 87 is W
             oTop -= speed;
@@ -47,6 +52,11 @@ function updatePos(Ev) {
             if (!facingRight) {
                 document.getElementById("obj1").style.transform = "scaleX(1)"; // flip again
                 facingRight = true;
+            }
+            // console.log(oLeft);
+            if (oLeft - document.getElementById("world").scrollLeft > 800) {
+                // treat section as our html body
+                document.getElementById("world").scrollBy(5, 0);
             }
             break;
         case 83: // 40 is Down, 83 is S
