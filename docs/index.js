@@ -8,7 +8,7 @@ var oLeft = 0;
 var oTop = 0;
 var speed = 5;
 var facingRight = null;
-var moving = null;
+var isMoving = null;
 
 function startMove() {
     if (dragobj) {
@@ -34,6 +34,7 @@ function updatePos(Ev) {
     else if (Ev.which) iKeyCode = Ev.which;
     switch (iKeyCode) {
         case 65: // 37 is Left, 65 is A
+            isMoving = true;    
             oLeft -= speed;
             if (facingRight) {
                 document.getElementById("obj1").style.transform = "scaleX(-1)"; // flip
@@ -46,10 +47,11 @@ function updatePos(Ev) {
             }
             break;
         case 87: // 38 is Up, 87 is W
+            isMoving = true;
             oTop -= speed;
             break;
         case 68: // 39 is Right, 58 is D
-            moving = true;
+            isMoving = true;
             oLeft += speed;
             if (!facingRight) {
                 document.getElementById("obj1").style.transform = "scaleX(1)"; // flip again
@@ -61,6 +63,7 @@ function updatePos(Ev) {
             }
             break;
         case 83: // 40 is Down, 83 is S
+            isMoving = true;
             oTop += speed;
             break;
         default:
@@ -119,17 +122,31 @@ function init() {
     const frames = document.getElementById("obj1").children;
     const frameCount = frames.length;
     let i = 0; // frame number
-    moving = false;
+    isMoving = false;
     // loop through the frame's numbers. setInterval means do this stuff on loop every 100 ms = 0.1 s
     setInterval(function () { 
-        if (moving) { // there are 15 frames for running rn
+        if (isMoving) { // there are 15 frames for running rn
+            // deactivate other sets of frames
+            frames[i % 2 + 15].style.display = "none";
+            // activate the running frames
             frames[i % 15].style.display = "none";
             frames[++i % 15].style.display = "block";
         }
         else { // i % 2 + 15 jumps to the 16th and 17th items
+            // deactivate the running frames
+            frames[i % 15].style.display = "none";
+            // activate the standing frames
             frames[i % 2 + 15].style.display = "none";
             frames[++i % 2 + 15].style.display = "block";
         }
     }, 100);
 }
 window.onload = init;
+
+// senses when user is not clicking the running buttons bc doing so turns isMoving into true
+// keyup means when any button is released, but isMoving limits to AWSD.
+document.addEventListener('keyup', (event) => {
+    if (isMoving) {
+        isMoving = false;
+    }
+  });
