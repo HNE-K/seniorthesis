@@ -179,7 +179,19 @@ a:active {
     }
   }
 
-  /* animated unicorn */
+#sky {
+  bottom: 0;
+  left: 0;
+  background-size: 1000px 100px;
+
+  position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #3586ff;
+    overflow: hidden;
+}
+
+/* animated unicorn */
 #obj1 img {
   display: none;
   -webkit-transform: scaleX(-1);

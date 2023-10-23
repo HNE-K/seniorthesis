@@ -112,10 +112,20 @@ function init() {
         if (slider.value >= 51 && slider.value <= 75) {
             console.log("autumn");
             document.getElementById("world").style.background = "#ebbd34";
+            document.getElementById("sky").style.display = "none";
+            document.getElementById("waves1").style.display = "block";
+            document.getElementById("waves2").style.display = "block";
+            document.getElementById("waves3").style.display = "block";
+            document.getElementById("waves4").style.display = "block";
         }
         if (slider.value >= 76 && slider.value <= 100) {
             console.log("winter");
             document.getElementById("world").style.background = "#9c2dcf";
+            document.getElementById("sky").style.display = "block";
+            document.getElementById("waves1").style.display = "none";
+            document.getElementById("waves2").style.display = "none";
+            document.getElementById("waves3").style.display = "none";
+            document.getElementById("waves4").style.display = "none";
         }
     }
 
@@ -140,6 +150,57 @@ function init() {
             frames[++i % 2 + 15].style.display = "block";
         }
     }, 100);
+    //get and store canvas & context
+  var canvas = document.getElementById("sky");
+  var ctx    = canvas.getContext("2d");
+  var h     = window.innerHeight;
+  var w     = window.innerWidth;
+//set dims to window
+  canvas.height = h;
+  canvas.width  = w;
+// Generate snowflakes 
+  var mf = 100; // max flakes
+  var flakes = [];
+ // loop through the empty flakes 
+  for(var j = 0; j < mf; j++){
+    
+    flakes.push({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      r: Math.random()*5+2, //min of 2px and max 7px
+      d: Math.random() + 1  // density of flakes
+      })
+  }
+  //draw flakes 
+  function drawFlakes(){
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    for(var j = 0; j < mf; j++){
+       var f = flakes[j];
+      ctx.moveTo(f.x, f.y);
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI*2, true);
+    }
+    ctx.fill();
+    moveFlakes();
+  }
+ //animate the flakes
+  var angle = 0;
+  function moveFlakes(){
+    angle += 0.01;
+    for(var j = 0; j < mf; j++){
+      //store the current flake
+      var f = flakes[j];
+      //Upadte Y and X coordinate of each snow
+      f.y += Math.pow(f.d, 2) + 1;
+      f.x += Math.sin(angle) * 2;
+      //if the snow reach to the bottom send it to the top again
+      if(f.y > h){
+        flakes[i] = {x: Math.random()*w, y: 0, r: f.r, d: f.d};
+        }
+      }
+    }
+  setInterval(drawFlakes, 25);
 }
 window.onload = init;
 
