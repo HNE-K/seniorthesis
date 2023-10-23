@@ -104,28 +104,35 @@ function init() {
         if (slider.value >= 1 && slider.value <= 25) {
             console.log("spring");
             document.getElementById("world").style.background = "#abff35";
+            document.getElementById("waves1").style.display = "none";
+            document.getElementById("waves2").style.display = "none";
+            document.getElementById("waves3").style.display = "none";
+            document.getElementById("waves4").style.display = "none";
         }
         if (slider.value >= 26 && slider.value <= 50) {
             console.log("summer");
             document.getElementById("world").style.background = "#3586ff";
-        }
-        if (slider.value >= 51 && slider.value <= 75) {
-            console.log("autumn");
-            document.getElementById("world").style.background = "#ebbd34";
-            document.getElementById("sky").style.display = "none";
+            document.getElementById("container").style.display = "none";
             document.getElementById("waves1").style.display = "block";
             document.getElementById("waves2").style.display = "block";
             document.getElementById("waves3").style.display = "block";
             document.getElementById("waves4").style.display = "block";
         }
-        if (slider.value >= 76 && slider.value <= 100) {
-            console.log("winter");
-            document.getElementById("world").style.background = "#9c2dcf";
-            document.getElementById("sky").style.display = "block";
+        if (slider.value >= 51 && slider.value <= 75) {
+            console.log("autumn");
+            document.getElementById("world").style.background = "#ebbd34";
+            document.getElementById("sky").style.display = "none";
+            document.getElementById("container").style.display = "block";
             document.getElementById("waves1").style.display = "none";
             document.getElementById("waves2").style.display = "none";
             document.getElementById("waves3").style.display = "none";
             document.getElementById("waves4").style.display = "none";
+        }
+        if (slider.value >= 76 && slider.value <= 100) {
+            console.log("winter");
+            document.getElementById("world").style.background = "#9c2dcf";
+            document.getElementById("sky").style.display = "block";
+            document.getElementById("container").style.display = "none";
         }
     }
 
@@ -203,6 +210,78 @@ function init() {
         }
         }
     setInterval(drawFlakes, 25);
+
+    // copy-pasted leaf animation
+    var container = document.getElementById("container");
+    var telaInteira = window.innerWidth;
+    
+    function logzin() {
+        telaInteira = window.innerWidth;
+    }
+    
+    setInterval(logzin, 1000);
+    
+    function createLeaf() {
+        var leaf = document.createElement("div");
+        leaf.innerHTML =
+            '<img src="https://art.pixilart.com/sr20867d214926b.png">';
+    
+        leaf.classList.add("leaf");
+        leaf.style.left = Math.random() * telaInteira + "px";
+        container.appendChild(leaf);
+    }
+    
+    setInterval(createLeaf, 100);
+    
+    var windStrength = 1;
+    
+    var windDirection = 1;
+    
+    function updateLeafPosition(leaf) {
+        leaf.style.top =
+            parseInt(leaf.style.top) + windDirection * windStrength + "px";
+        leaf.style.left =
+            parseInt(leaf.style.left) + windDirection * windStrength + "px";
+    
+        if (parseInt(leaf.style.top) > window.innerHeight) {
+            leaf.remove();
+        }
+    }
+    
+    setInterval(function () {
+        var leaves = document.querySelectorAll(".leaf");
+        for (var i = 0; i < leaves.length; i++) {
+            updateLeafPosition(leaves[i]);
+        }
+    }, 10);
+    
+    document.addEventListener("mousemove", (event) => {
+        var metadeTela = window.innerWidth / 2;
+        var xdomouse = event.pageX;
+        if (xdomouse > metadeTela) {
+            windDirection = 1;
+        } else {
+            windDirection = -1;
+        }
+    });
+    
+    document.addEventListener("mousemove", (event2) => {
+        var metadeTela = window.innerWidth / 2;
+        var xdomouse2 = event2.pageX;
+        if (xdomouse2 > metadeTela && xdomouse2 < metadeTela + 300) {
+            windStrength = 1;
+        } else if (xdomouse2 > metadeTela + 300 && xdomouse2 < metadeTela + 600) {
+            windStrength = 2;
+        } else if (xdomouse2 > metadeTela + 600) {
+            windStrength = 3;
+        } else if (xdomouse2 < metadeTela && xdomouse2 > metadeTela - 300) {
+            windStrength = 1;
+        } else if (xdomouse2 < metadeTela - 300 && xdomouse2 > metadeTela - 600) {
+            windStrength = 2;
+        } else if (xdomouse2 < metadeTela - 600) {
+            windStrength = 3;
+        }
+    });
 }
 window.onload = init;
 
@@ -213,3 +292,4 @@ document.addEventListener('keyup', (event) => {
         isMoving = false;
     }
   });
+  

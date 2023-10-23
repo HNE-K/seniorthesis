@@ -104,18 +104,35 @@ function init() {
         if (slider.value >= 1 && slider.value <= 25) {
             console.log("spring");
             document.getElementById("world").style.background = "#abff35";
+            document.getElementById("waves1").style.display = "none";
+            document.getElementById("waves2").style.display = "none";
+            document.getElementById("waves3").style.display = "none";
+            document.getElementById("waves4").style.display = "none";
         }
         if (slider.value >= 26 && slider.value <= 50) {
             console.log("summer");
             document.getElementById("world").style.background = "#3586ff";
+            document.getElementById("container").style.display = "none";
+            document.getElementById("waves1").style.display = "block";
+            document.getElementById("waves2").style.display = "block";
+            document.getElementById("waves3").style.display = "block";
+            document.getElementById("waves4").style.display = "block";
         }
         if (slider.value >= 51 && slider.value <= 75) {
             console.log("autumn");
             document.getElementById("world").style.background = "#ebbd34";
+            document.getElementById("sky").style.display = "none";
+            document.getElementById("container").style.display = "block";
+            document.getElementById("waves1").style.display = "none";
+            document.getElementById("waves2").style.display = "none";
+            document.getElementById("waves3").style.display = "none";
+            document.getElementById("waves4").style.display = "none";
         }
         if (slider.value >= 76 && slider.value <= 100) {
             console.log("winter");
             document.getElementById("world").style.background = "#9c2dcf";
+            document.getElementById("sky").style.display = "block";
+            document.getElementById("container").style.display = "none";
         }
     }
 
@@ -140,6 +157,131 @@ function init() {
             frames[++i % 2 + 15].style.display = "block";
         }
     }, 100);
+
+    // Winter Snow animation
+    //get and store canvas & context
+    var canvas = document.getElementById("sky");
+    var ctx    = canvas.getContext("2d");
+    var h     = window.innerHeight;
+    var w     = window.innerWidth;
+    //set dims to window
+    canvas.height = h;
+    canvas.width  = w;
+    // Generate snowflakes 
+    var mf = 100; // max flakes
+    var flakes = [];
+    // loop through the empty flakes 
+    for(var j = 0; j < mf; j++){
+        
+        flakes.push({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: Math.random()*5+2, //min of 2px and max 7px
+        d: Math.random() + 1  // density of flakes
+        })
+    }
+    //draw flakes 
+    function drawFlakes(){
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        for(var j = 0; j < mf; j++){
+        var f = flakes[j];
+        ctx.moveTo(f.x, f.y);
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI*2, true);
+        }
+        ctx.fill();
+        moveFlakes();
+    }
+    //animate the flakes
+    var angle = 0;
+    function moveFlakes(){
+        angle += 0.01;
+        for(var j = 0; j < mf; j++){
+        //store the current flake
+        var f = flakes[j];
+        //Upadte Y and X coordinate of each snow
+        f.y += Math.pow(f.d, 2) + 1;
+        f.x += Math.sin(angle) * 2;
+        //if the snow reach to the bottom send it to the top again
+        if(f.y > h){
+            flakes[j] = {x: Math.random()*w, y: 0, r: f.r, d: f.d};
+            }
+        }
+        }
+    setInterval(drawFlakes, 25);
+
+    // copy-pasted leaf animation
+    var container = document.getElementById("container");
+    var telaInteira = window.innerWidth;
+    
+    function logzin() {
+        telaInteira = window.innerWidth;
+    }
+    
+    setInterval(logzin, 1000);
+    
+    function createLeaf() {
+        var leaf = document.createElement("div");
+        leaf.innerHTML =
+            '<img src="https://art.pixilart.com/sr20867d214926b.png">';
+    
+        leaf.classList.add("leaf");
+        leaf.style.left = Math.random() * telaInteira + "px";
+        container.appendChild(leaf);
+    }
+    
+    setInterval(createLeaf, 100);
+    
+    var windStrength = 1;
+    
+    var windDirection = 1;
+    
+    function updateLeafPosition(leaf) {
+        leaf.style.top =
+            parseInt(leaf.style.top) + windDirection * windStrength + "px";
+        leaf.style.left =
+            parseInt(leaf.style.left) + windDirection * windStrength + "px";
+    
+        if (parseInt(leaf.style.top) > window.innerHeight) {
+            leaf.remove();
+        }
+    }
+    
+    setInterval(function () {
+        var leaves = document.querySelectorAll(".leaf");
+        for (var i = 0; i < leaves.length; i++) {
+            updateLeafPosition(leaves[i]);
+        }
+    }, 10);
+    
+    document.addEventListener("mousemove", (event) => {
+        var metadeTela = window.innerWidth / 2;
+        var xdomouse = event.pageX;
+        if (xdomouse > metadeTela) {
+            windDirection = 1;
+        } else {
+            windDirection = -1;
+        }
+    });
+    
+    document.addEventListener("mousemove", (event2) => {
+        var metadeTela = window.innerWidth / 2;
+        var xdomouse2 = event2.pageX;
+        if (xdomouse2 > metadeTela && xdomouse2 < metadeTela + 300) {
+            windStrength = 1;
+        } else if (xdomouse2 > metadeTela + 300 && xdomouse2 < metadeTela + 600) {
+            windStrength = 2;
+        } else if (xdomouse2 > metadeTela + 600) {
+            windStrength = 3;
+        } else if (xdomouse2 < metadeTela && xdomouse2 > metadeTela - 300) {
+            windStrength = 1;
+        } else if (xdomouse2 < metadeTela - 300 && xdomouse2 > metadeTela - 600) {
+            windStrength = 2;
+        } else if (xdomouse2 < metadeTela - 600) {
+            windStrength = 3;
+        }
+    });
 }
 window.onload = init;
 
@@ -150,3 +292,4 @@ document.addEventListener('keyup', (event) => {
         isMoving = false;
     }
   });
+  
