@@ -9,6 +9,10 @@ var oTop = 0;
 var speed = 5;
 var facingRight = null;
 var isMoving = null;
+var shuffledLeaves = false;
+var NPCcounter = 0;
+var deltaX = 0;
+var deltaY = 0;
 
 function startMove() {
     if (dragobj) {
@@ -103,7 +107,7 @@ function init() {
     slider.oninput = function() {
         if (slider.value >= 1 && slider.value <= 25) {
             console.log("spring");
-            document.getElementById("world").style.background = "#abff35";
+            document.getElementById("world").style.backgroundImage = "url(images/springtemp.jpg)";
             document.getElementById("waves1").style.display = "none";
             document.getElementById("waves2").style.display = "none";
             document.getElementById("waves3").style.display = "none";
@@ -111,7 +115,7 @@ function init() {
         }
         if (slider.value >= 26 && slider.value <= 50) {
             console.log("summer");
-            document.getElementById("world").style.background = "#3586ff";
+            document.getElementById("world").style.backgroundImage = "url(images/desert.jpg)";
             document.getElementById("container").style.display = "none";
             document.getElementById("waves1").style.display = "block";
             document.getElementById("waves2").style.display = "block";
@@ -120,7 +124,7 @@ function init() {
         }
         if (slider.value >= 51 && slider.value <= 75) {
             console.log("autumn");
-            document.getElementById("world").style.background = "#ebbd34";
+            document.getElementById("world").style.backgroundImage = "url(images/autumntemp.jpeg)";
             document.getElementById("sky").style.display = "none";
             document.getElementById("container").style.display = "block";
             document.getElementById("waves1").style.display = "none";
@@ -130,7 +134,7 @@ function init() {
         }
         if (slider.value >= 76 && slider.value <= 100) {
             console.log("winter");
-            document.getElementById("world").style.background = "#9c2dcf";
+            document.getElementById("world").style.backgroundImage = "url(images/wintertemp.webp)";
             document.getElementById("sky").style.display = "block";
             document.getElementById("container").style.display = "none";
         }
@@ -229,9 +233,21 @@ function init() {
         leaf.classList.add("leaf");
         leaf.style.left = Math.random() * telaInteira + "px";
         container.appendChild(leaf);
+
+        // var leaves = document.querySelectorAll(".leaf");
+        // if (leaves.length == 10 && !shuffledLeaves) {
+        //     shuffledLeaves = true;
+        //     for (var j = 0; j < leaves.length; j++) {
+        //         // leaves[j].style.left = 0;
+        //         leaves[j].style.top = Math.random() * window.innerHeight + "px";
+        //     }
+        // }
     }
     
     setInterval(createLeaf, 100);
+    // for (var j = 0; j < 100; j++) {
+    //     createLeaf();
+    // }
     
     var windStrength = 1;
     
@@ -282,6 +298,33 @@ function init() {
             windStrength = 3;
         }
     });
+
+    // NPC's random animations
+    // Walking in random directions by adding random value to original position
+    setInterval(function() {
+        var npc = document.getElementById("NPC");
+        if (Math.random() <= 0.01) {
+            console.log("NPC says hello"); // runs 1 time per 10 secs
+        }
+        if (NPCcounter == 0) {
+            // can change deltaX and deltaY to a pattern for __ secs
+            deltaX = Math.floor(Math.random() * 4); // *4 is for increasing speed, which is random
+            deltaY = Math.floor(Math.random() * 4);
+            NPCcounter = 50; // walk in same direction for 5 seconds
+            // randomize direction
+            if (Math.random() <= 0.5) {
+                deltaX *= -1;
+            }
+            if (Math.random() <= 0.5) {
+                deltaY *= -1;
+            }
+        }
+        var newX = npc.offsetLeft + deltaX;
+        var newY = npc.offsetTop + deltaY;
+        NPCcounter -= 1;
+        document.getElementById("NPC").style.left = newX;
+        document.getElementById("NPC").style.top = newY;
+    }, 100); // runs 10 times per second
 }
 window.onload = init;
 
