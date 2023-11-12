@@ -13,6 +13,7 @@ var shuffledLeaves = false;
 var NPCcounter = 0;
 var deltaX = 0;
 var deltaY = 0;
+var currentSeason = "spring";
 
 function startMove() {
     if (dragobj) {
@@ -107,6 +108,7 @@ function init() {
     slider.oninput = function() {
         if (slider.value >= 1 && slider.value <= 25) {
             console.log("spring");
+            currentSeason = "spring";
             document.getElementById("world").style.backgroundImage = "url(images/springtemp.jpg)";
             document.getElementById("waves1").style.display = "none";
             document.getElementById("waves2").style.display = "none";
@@ -115,6 +117,7 @@ function init() {
         }
         if (slider.value >= 26 && slider.value <= 50) {
             console.log("summer");
+            currentSeason = "summer";
             document.getElementById("world").style.backgroundImage = "url(images/desert.jpg)";
             document.getElementById("container").style.display = "none";
             document.getElementById("waves1").style.display = "block";
@@ -124,6 +127,13 @@ function init() {
         }
         if (slider.value >= 51 && slider.value <= 75) {
             console.log("autumn");
+            if (currentSeason != "autumn") {
+                var leaves = document.querySelectorAll(".leaf");
+                for (var j = 0; j < leaves.length; j++) {
+                    leaves[j].style.top = Math.random()*window.innerHeight + "px";
+                }
+            }
+            currentSeason = "autumn";
             document.getElementById("world").style.backgroundImage = "url(images/autumntemp.jpeg)";
             document.getElementById("sky").style.display = "none";
             document.getElementById("container").style.display = "block";
@@ -134,6 +144,7 @@ function init() {
         }
         if (slider.value >= 76 && slider.value <= 100) {
             console.log("winter");
+            currentSeason = "winter";
             document.getElementById("world").style.backgroundImage = "url(images/wintertemp.webp)";
             document.getElementById("sky").style.display = "block";
             document.getElementById("container").style.display = "none";
@@ -255,7 +266,7 @@ function init() {
     
     function updateLeafPosition(leaf) {
         leaf.style.top =
-            parseInt(leaf.style.top) + windDirection * windStrength + "px";
+            parseInt(leaf.style.top) + 1 + "px";
         leaf.style.left =
             parseInt(leaf.style.left) + windDirection * windStrength + "px";
     
@@ -303,8 +314,15 @@ function init() {
     // Walking in random directions by adding random value to original position
     setInterval(function() {
         var npc = document.getElementById("NPC");
+        var phrases = ["Hello!", "How are you?", "I'm hungry", "Where am I?"];
         if (Math.random() <= 0.01) {
             console.log("NPC says hello"); // runs 1 time per 10 secs
+            var phrase = phrases[Math.floor(Math.random()*phrases.length)];
+            document.getElementById("speechbubble").style.visibility = "visible";
+            document.getElementById("NPCspeech").innerHTML = phrase;
+            setTimeout(() => {
+                document.getElementById("speechbubble").style.visibility = "hidden";
+            }, 4000); // 4 seconds
         }
         if (NPCcounter == 0) {
             // can change deltaX and deltaY to a pattern for __ secs
@@ -322,8 +340,10 @@ function init() {
         var newX = npc.offsetLeft + deltaX;
         var newY = npc.offsetTop + deltaY;
         NPCcounter -= 1;
-        document.getElementById("NPC").style.left = newX;
-        document.getElementById("NPC").style.top = newY;
+        if (newX >= 0 && newY >= 0 && newY < window.innerHeight && newX < window.innerWidth) {
+            document.getElementById("NPC").style.left = newX;
+            document.getElementById("NPC").style.top = newY;
+        }
     }, 100); // runs 10 times per second
 }
 window.onload = init;
