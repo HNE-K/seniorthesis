@@ -205,7 +205,7 @@ function init() {
         flakes.push({
         x: Math.random()*w,
         y: Math.random()*h,
-        r: Math.random()*5+2, //min of 2px and max 7px
+        r: Math.random()*3+2, //min of 2px and max 7px
         d: Math.random() + 1  // density of flakes
         })
     }

@@ -1,3 +1,12 @@
+#title {
+  position: relative;
+  z-index: 100000;
+  width:90%;
+  height:50px;
+  text-align:left;
+  margin:10px;
+}
+
 #instructions {
   border-radius: 25px;
   background: url(images/instructionsBG.jpg);
@@ -513,8 +522,8 @@ a:active {
   left: 0;
   background-size: 1000px 100px;
 
-  position: relative;
-    width: 100%;
+  position: absolute;
+    width: 200%;
     height: 100vh;
     overflow: hidden;
 }
@@ -534,7 +543,7 @@ a:active {
 #container {
 	width: 100vw;
 	height: 100vh;
-	position: relative;
+	position: absolute;
 }
 
 .leaf {
