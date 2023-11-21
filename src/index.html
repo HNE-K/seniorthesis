@@ -14,7 +14,14 @@
     <div id="waves3" class='air air3' style="display: none;"></div>
     <div id="waves4" class='air air4' style="display: none;"></div>
     <div style="width:90%;height:50px;text-align:left;margin:10px;">
-    <h1>Senior Thesis</h1>
+        <h1>Senior Thesis</h1>
+    </div>
+    <div>
+        <input id="open_instructions" type="button" value="Instructions" onclick="document.getElementById('instructions').style.visibility = 'visible';">
+    </div>
+    <div id="instructions">
+        <span id="close" onclick="this.parentNode.style.visibility = 'hidden'"; return false;">x</span>
+        <p>WASD</p>
     </div>
     <div id="obj1">
         <!-- ordered list, array. 0-15 are running, 16-17 are standing, etc. -->
