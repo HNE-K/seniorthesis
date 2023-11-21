@@ -159,7 +159,7 @@ function init() {
         if (slider.value >= 76 && slider.value <= 100) {
             console.log("winter");
             currentSeason = "winter";
-            document.getElementById("world").style.backgroundImage = "url(images/wintertemp.webp)";
+            document.getElementById("world").style.backgroundImage = "url(images/wintertemp_resized.webp)";
             document.getElementById("sky").style.display = "block";
             document.getElementById("container").style.display = "none";
         }
@@ -241,13 +241,7 @@ function init() {
 
     // copy-pasted leaf animation
     var container = document.getElementById("container");
-    var telaInteira = window.innerWidth;
-    
-    function logzin() {
-        telaInteira = window.innerWidth;
-    }
-    
-    setInterval(logzin, 1000);
+    var telaInteira = 2*window.innerWidth; // to expand the leaves' range to cover the whole map, which is also 2 times the initial window
     
     function createLeaf() {
         var leaf = document.createElement("div");

@@ -1,3 +1,7 @@
+#world {
+  background-attachment: local;
+}
+
 #title {
   position: relative;
   z-index: 100000;
@@ -541,7 +545,7 @@ a:active {
 
 
 #container {
-	width: 100vw;
+	width: 200vw;
 	height: 100vh;
 	position: absolute;
   user-select: none;

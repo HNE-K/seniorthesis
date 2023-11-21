@@ -1,3 +1,16 @@
+#world {
+  background-attachment: local;
+}
+
+#title {
+  position: relative;
+  z-index: 100000;
+  width:90%;
+  height:50px;
+  text-align:left;
+  margin:10px;
+}
+
 #instructions {
   border-radius: 25px;
   background: url(images/instructionsBG.jpg);
@@ -512,11 +525,11 @@ a:active {
   bottom: 0;
   left: 0;
   background-size: 1000px 100px;
-
-  position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+  user-select: none;
+  position: absolute;
+  width: 200vw; /* must be a square canvas */
+  height: 200vh; /* thus width and height should be same multiple of v_ */
+  overflow: hidden;
 }
 
 /* animated unicorn */
@@ -532,9 +545,10 @@ a:active {
 
 
 #container {
-	width: 100vw;
+	width: 200vw;
 	height: 100vh;
-	position: relative;
+	position: absolute;
+  user-select: none;
 }
 
 .leaf {
