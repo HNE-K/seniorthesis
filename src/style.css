@@ -49,6 +49,12 @@ a:active {
   left: 70%;
 }
 
+#NPC2 {
+  position: absolute;
+  top: 20%;
+  left: 50;
+}
+
 /* speech bubble for NPC */
 .talk-bubble {
 	margin: 40px;

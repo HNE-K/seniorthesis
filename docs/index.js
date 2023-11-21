@@ -39,7 +39,10 @@ function updatePos(Ev) {
     else if (Ev.which) iKeyCode = Ev.which;
     switch (iKeyCode) {
         case 65: // 37 is Left, 65 is A
-            isMoving = true;    
+            isMoving = true;
+            if (oLeft < 60) {
+                break; // don't move out of bounds
+            }
             oLeft -= speed;
             if (facingRight) {
                 document.getElementById("obj1").style.transform = "scaleX(-1)"; // flip
@@ -53,10 +56,17 @@ function updatePos(Ev) {
             break;
         case 87: // 38 is Up, 87 is W
             isMoving = true;
+            if (oTop < 0) {
+                break;
+            }
             oTop -= speed;
             break;
         case 68: // 39 is Right, 58 is D
             isMoving = true;
+            if (oLeft > 2170) {
+                break;
+            }
+            // console.log(oLeft);
             oLeft += speed;
             if (!facingRight) {
                 document.getElementById("obj1").style.transform = "scaleX(1)"; // flip again
@@ -69,6 +79,10 @@ function updatePos(Ev) {
             break;
         case 83: // 40 is Down, 83 is S
             isMoving = true;
+            if (oTop > 540) {
+                break;
+            }
+            // console.log(oTop);
             oTop += speed;
             break;
         default:
@@ -340,11 +354,22 @@ function init() {
         var newX = npc.offsetLeft + deltaX;
         var newY = npc.offsetTop + deltaY;
         NPCcounter -= 1;
-        if (newX >= 0 && newY >= 0 && newY < window.innerHeight && newX < window.innerWidth) {
+        // limit NPC's movement to the world
+        if (newX >= 0 && newY >= 0 && newY < 400 && newX < 2100) {
             document.getElementById("NPC").style.left = newX;
             document.getElementById("NPC").style.top = newY;
         }
     }, 100); // runs 10 times per second
+
+    setInterval(function() {
+        var npc = document.getElementById("NPC2img");
+        if (Math.random() < 0.5) {
+            npc.src = "images/NPC.gif";
+        }
+        else {
+            npc.src = "images/NPC2.gif";
+        }
+    }, 1000);
 }
 window.onload = init;
 
