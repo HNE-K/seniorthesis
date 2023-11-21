@@ -521,11 +521,11 @@ a:active {
   bottom: 0;
   left: 0;
   background-size: 1000px 100px;
-
+  user-select: none;
   position: absolute;
-    width: 200%;
-    height: 100vh;
-    overflow: hidden;
+  width: 200vw; /* must be a square canvas */
+  height: 200vh; /* thus width and height should be same multiple of v_ */
+  overflow: hidden;
 }
 
 /* animated unicorn */
@@ -544,6 +544,7 @@ a:active {
 	width: 100vw;
 	height: 100vh;
 	position: absolute;
+  user-select: none;
 }
 
 .leaf {

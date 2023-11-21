@@ -201,11 +201,10 @@ function init() {
     var flakes = [];
     // loop through the empty flakes 
     for(var j = 0; j < mf; j++){
-        
         flakes.push({
         x: Math.random()*w,
-        y: Math.random()*h,
-        r: Math.random()*3+2, //min of 2px and max 7px
+        y: Math.random()*(h/2),
+        r: Math.random()*2+2, //min of 2px and max 7px
         d: Math.random() + 1  // density of flakes
         })
     }
