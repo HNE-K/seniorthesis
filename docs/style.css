@@ -391,6 +391,7 @@ a:active {
   position: absolute;
   top: 43%;
   left: 57%;
+  z-index: 2;
 }
 
 #art2 {
@@ -403,6 +404,7 @@ a:active {
   position: absolute;
   top: 23%;
   left: 37%;
+  z-index: 2;
 }
 
 #art3 {
@@ -415,6 +417,7 @@ a:active {
   position: absolute;
   top: 43%;
   left: 177%;
+  z-index: 2;
 }
 
 /* The slider itself */

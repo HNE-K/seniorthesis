@@ -121,16 +121,20 @@ function init() {
     // upon clicking/moving the slider, this function runs.
     slider.oninput = function() {
         if (slider.value >= 1 && slider.value <= 25) {
-            console.log("spring");
             currentSeason = "spring";
             document.getElementById("world").style.backgroundImage = "url(images/springtemp.jpg)";
             document.getElementById("waves1").style.display = "none";
             document.getElementById("waves2").style.display = "none";
             document.getElementById("waves3").style.display = "none";
             document.getElementById("waves4").style.display = "none";
+            document.getElementById("art1Link").href = "spring_art1.html";
+            document.getElementById("art1Preview").firstElementChild.innerHTML = "Preview of Spring Art1";
+            document.getElementById("art2Link").href = "spring_art2.html";
+            document.getElementById("art2Preview").firstElementChild.innerHTML = "Preview of Spring Art2";
+            document.getElementById("art3Link").href = "spring_art3.html";
+            document.getElementById("art3Preview").firstElementChild.innerHTML = "Preview of Spring Art3";
         }
         if (slider.value >= 26 && slider.value <= 50) {
-            console.log("summer");
             currentSeason = "summer";
             document.getElementById("world").style.backgroundImage = "url(images/desert.jpg)";
             document.getElementById("container").style.display = "none";
@@ -138,9 +142,15 @@ function init() {
             document.getElementById("waves2").style.display = "block";
             document.getElementById("waves3").style.display = "block";
             document.getElementById("waves4").style.display = "block";
+            document.getElementById("art1Link").href = "summer_art1.html";
+            document.getElementById("art1Preview").firstElementChild.innerHTML = "Preview of Summer Art1";
+            document.getElementById("art2Link").href = "summer_art2.html";
+            document.getElementById("art2Preview").firstElementChild.innerHTML = "Preview of Summer Art2";
+            document.getElementById("art3Link").href = "summer_art3.html";
+            document.getElementById("art3Preview").firstElementChild.innerHTML = "Preview of Summer Art3";
         }
         if (slider.value >= 51 && slider.value <= 75) {
-            console.log("autumn");
+            // initial batch of leaves. purpose: natural initial position
             if (currentSeason != "autumn") {
                 var leaves = document.querySelectorAll(".leaf");
                 for (var j = 0; j < leaves.length; j++) {
@@ -155,13 +165,24 @@ function init() {
             document.getElementById("waves2").style.display = "none";
             document.getElementById("waves3").style.display = "none";
             document.getElementById("waves4").style.display = "none";
+            document.getElementById("art1Link").href = "autumn_art1.html";
+            document.getElementById("art1Preview").firstElementChild.innerHTML = "Preview of Autumn Art1";
+            document.getElementById("art2Link").href = "autumn_art2.html";
+            document.getElementById("art2Preview").firstElementChild.innerHTML = "Preview of Autumn Art2";
+            document.getElementById("art3Link").href = "autumn_art3.html";
+            document.getElementById("art3Preview").firstElementChild.innerHTML = "Preview of Autumn Art3";
         }
         if (slider.value >= 76 && slider.value <= 100) {
-            console.log("winter");
             currentSeason = "winter";
             document.getElementById("world").style.backgroundImage = "url(images/wintertemp_resized.webp)";
             document.getElementById("sky").style.display = "block";
             document.getElementById("container").style.display = "none";
+            document.getElementById("art1Link").href = "winter_art1.html";
+            document.getElementById("art1Preview").firstElementChild.innerHTML = "Preview of Winter Art1";
+            document.getElementById("art2Link").href = "winter_art2.html";
+            document.getElementById("art2Preview").firstElementChild.innerHTML = "Preview of Winter Art2";
+            document.getElementById("art3Link").href = "winter_art3.html";
+            document.getElementById("art3Preview").firstElementChild.innerHTML = "Preview of Winter Art3";
         }
     }
 
@@ -214,9 +235,9 @@ function init() {
         ctx.fillStyle = "white";
         ctx.beginPath();
         for(var j = 0; j < mf; j++){
-        var f = flakes[j];
-        ctx.moveTo(f.x, f.y);
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI*2, true);
+            var f = flakes[j];
+            ctx.moveTo(f.x, f.y);
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI*2, true);
         }
         ctx.fill();
         moveFlakes();
@@ -250,6 +271,10 @@ function init() {
     
         leaf.classList.add("leaf");
         leaf.style.left = Math.random() * telaInteira + "px";
+        // if (currentSeason != "autumn") {
+        //     console.log("hello");
+        //     leaf.style.top = Math.random()*window.innerHeight + "px";
+        // }
         container.appendChild(leaf);
 
         // var leaves = document.querySelectorAll(".leaf");
