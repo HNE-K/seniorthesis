@@ -150,11 +150,13 @@ function init() {
             document.getElementById("art3Preview").firstElementChild.innerHTML = "Preview of Summer Art3";
         }
         if (slider.value >= 51 && slider.value <= 75) {
-            // initial batch of leaves. purpose: natural initial position
+            // initial batch of leaves
+            // purpose: natural initial position. Looks better than without (straight line eww) but still a huge and separated batch is not ideal
             if (currentSeason != "autumn") {
                 var leaves = document.querySelectorAll(".leaf");
                 for (var j = 0; j < leaves.length; j++) {
                     leaves[j].style.top = Math.random()*window.innerHeight + "px";
+                    leaves[j].style.visibility = "hidden"; // just hide this batch. the subsequent leaves look natural enough.
                 }
             }
             currentSeason = "autumn";
